@@ -1,5 +1,6 @@
 package org.fireking.app.imagelib;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.fireking.app.imagelib.MyImageView.OnMeasureListener;
 import org.fireking.app.imagelib.NativeImageLoader.NativeImageCallBack;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
@@ -64,7 +66,6 @@ public class PicSelectActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-
 			}
 		});
 
@@ -72,10 +73,11 @@ public class PicSelectActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				// Intent intent = new Intent();
-				// intent.putExtra(IMAGES, (Serializable) );
-				// setResult(RESULT_OK, intent);
-				// finish();
+				List<ImageBean> selecteds = getSelectedItem();
+				Intent intent = new Intent();
+				intent.putExtra(IMAGES, (Serializable) selecteds);
+				setResult(RESULT_OK, intent);
+				finish();
 			}
 		});
 

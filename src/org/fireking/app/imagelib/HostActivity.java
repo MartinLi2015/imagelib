@@ -28,7 +28,6 @@ public class HostActivity extends BaseActivity {
 				startActivityForResult(intent, 0x123);
 			}
 		});
-
 	}
 
 	@Override
