@@ -53,6 +53,7 @@ public class PicSelectActivity extends BaseActivity {
 
 	int height = 0;
 	List<AlbumBean> mAlbumBean;
+	public static final String IMAGES = "images";
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -75,7 +76,7 @@ public class PicSelectActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.putExtra("images", (Serializable) selecteds);
+				intent.putExtra(IMAGES, (Serializable) selecteds);
 				setResult(RESULT_OK, intent);
 				finish();
 			}
