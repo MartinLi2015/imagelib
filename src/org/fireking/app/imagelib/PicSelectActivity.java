@@ -1,5 +1,6 @@
 package org.fireking.app.imagelib;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.fireking.app.imagelib.MyImageView.OnMeasureListener;
@@ -119,9 +120,9 @@ public class PicSelectActivity extends BaseActivity {
 		public void notifyChecked() {
 			selected = getSelectedCount();
 			// 改变完成统计
-			complete.setText("完成(" + selected + "/9)");
+			complete.setText("完成(" + selected + "/" + Config.limit + ")");
 			// 改变预览统计
-			preView.setText("预览(" + selected + "/9)");
+			preView.setText("预览(" + selected + "/" + Config.limit + ")");
 		}
 
 	};
@@ -166,6 +167,23 @@ public class PicSelectActivity extends BaseActivity {
 			}
 		}
 		return count;
+	}
+
+	private List<ImageBean> getSelectedItem() {
+		int count = 0;
+		List<ImageBean> beans = new ArrayList<ImageBean>();
+		OK: for (AlbumBean albumBean : mAlbumBean) {
+			for (ImageBean b : albumBean.sets) {
+				if (b.isChecked == true) {
+					beans.add(b);
+					count++;
+				}
+				if (count == Config.limit) {
+					break OK;
+				}
+			}
+		}
+		return beans;
 	}
 
 	private PopupWindow showPopWindow() {

@@ -32,9 +32,6 @@ public class PicSelectAdapter extends BaseAdapter {
 	OnImageSelectedListener onImageSelectedListener;
 	OnImageSelectedCountListener onImageSelectedCountListener;
 
-	// 最大选中数量
-	final int limit = 9;
-
 	public PicSelectAdapter(Context context, GridView mGridView,
 			OnImageSelectedCountListener onImageSelectedCountListener) {
 		this.context = context;
@@ -104,8 +101,9 @@ public class PicSelectAdapter extends BaseAdapter {
 						System.out.println("---onCheckedChanged");
 						int count = onImageSelectedCountListener
 								.getImageSelectedCount();
-						if (count == limit && isChecked) {
-							Toast.makeText(context, "最多只能现在" + limit + "张图片",
+						if (count == Config.limit && isChecked) {
+							Toast.makeText(context,
+									"最多只能现在" + Config.limit + "张图片",
 									Toast.LENGTH_SHORT).show();
 							viewHolder.mCheckBox.setChecked(ib.isChecked);
 						} else {
