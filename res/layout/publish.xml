@@ -10,10 +10,4 @@
         android:layout_height="wrap_content"
         android:text="开始" />
 
-    <Button
-        android:id="@+id/pop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="弹出层" />
-
 </LinearLayout>

@@ -29,23 +29,6 @@ public class HostActivity extends BaseActivity {
 			}
 		});
 
-		final Button pop = (Button) this.findViewById(R.id.pop);
-		pop.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				LayoutInflater inflater = LayoutInflater
-						.from(HostActivity.this);
-				View view = inflater.inflate(
-						R.layout.the_picture_selection_pop, null);
-				final PopupWindow mPopupWindow = new PopupWindow(view,
-						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT,
-						true);
-				mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
-				mPopupWindow.setOutsideTouchable(true);
-				mPopupWindow.showAsDropDown(pop);
-			}
-		});
 	}
 
 	@Override

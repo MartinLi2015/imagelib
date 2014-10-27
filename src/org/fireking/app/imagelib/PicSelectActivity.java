@@ -1,14 +1,11 @@
 package org.fireking.app.imagelib;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.fireking.app.imagelib.MyImageView.OnMeasureListener;
 import org.fireking.app.imagelib.NativeImageLoader.NativeImageCallBack;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
@@ -44,12 +41,12 @@ public class PicSelectActivity extends BaseActivity {
 	TextView complete;
 	TextView preView;
 
-	List<ImageBean> selecteds = new ArrayList<ImageBean>();
-
 	static final int SCAN_OK = 0x1001;
 
 	static boolean isOpened = false;
 	PopupWindow popWindow;
+
+	int selected = 0;
 
 	int height = 0;
 	List<AlbumBean> mAlbumBean;
@@ -59,7 +56,6 @@ public class PicSelectActivity extends BaseActivity {
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.the_picture_selection);
-
 		album = (TextView) this.findViewById(R.id.album);
 		complete = (TextView) this.findViewById(R.id.complete);
 		preView = (TextView) this.findViewById(R.id.preview);
@@ -75,10 +71,10 @@ public class PicSelectActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.putExtra(IMAGES, (Serializable) selecteds);
-				setResult(RESULT_OK, intent);
-				finish();
+				// Intent intent = new Intent();
+				// intent.putExtra(IMAGES, (Serializable) );
+				// setResult(RESULT_OK, intent);
+				// finish();
 			}
 		});
 
@@ -113,27 +109,21 @@ public class PicSelectActivity extends BaseActivity {
 
 		@Override
 		public int getImageSelectedCount() {
-			return selecteds.size();
+			return selected;
 		}
 	};
 
 	OnImageSelectedListener onImageSelectedListener = new OnImageSelectedListener() {
 
 		@Override
-		public void onImageSelected(ImageBean ib) {
-			if (ib.isChecked) {
-				selecteds.add(ib);
-			} else {
-				selecteds.remove(ib);
-			}
-			if (selecteds.size() != 0) {
-				// 更改完成按钮上的数字
-				complete.setText("完成(" + selecteds.size() + "/9)");
-				// 更改预览按钮的数字
-				preView.setText("预览(" + selecteds.size() + ")");
-			}
-
+		public void notifyChecked() {
+			selected = getSelectedCount();
+			// 改变完成统计
+			complete.setText("完成(" + selected + "/9)");
+			// 改变预览统计
+			preView.setText("预览(" + selected + "/9)");
 		}
+
 	};
 
 	private void showPic() {
@@ -161,6 +151,23 @@ public class PicSelectActivity extends BaseActivity {
 		};
 	};
 
+	/**
+	 * 获取选中的数值
+	 * 
+	 * @return
+	 */
+	private int getSelectedCount() {
+		int count = 0;
+		for (AlbumBean albumBean : mAlbumBean) {
+			for (ImageBean b : albumBean.sets) {
+				if (b.isChecked == true) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
 	private PopupWindow showPopWindow() {
 		LayoutInflater inflater = LayoutInflater.from(this);
 		View view = inflater.inflate(R.layout.the_picture_selection_pop, null);
@@ -180,7 +187,6 @@ public class PicSelectActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				AlbumBean b = (AlbumBean) parent.getItemAtPosition(position);
-
 				adapter.taggle(b);
 				// 更改选中的文字
 				album.setText(b.folderName);
@@ -279,7 +285,7 @@ public class PicSelectActivity extends BaseActivity {
 	}
 
 	public interface OnImageSelectedListener {
-		void onImageSelected(ImageBean ib);
+		void notifyChecked();
 	}
 
 	public interface OnImageSelectedCountListener {

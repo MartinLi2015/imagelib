@@ -27,7 +27,8 @@
         </activity>
         <activity
             android:name="org.fireking.app.imagelib.PicSelectActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
     </application>
 

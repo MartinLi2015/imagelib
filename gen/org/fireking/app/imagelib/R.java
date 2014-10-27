@@ -17,51 +17,50 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static int activity_horizontal_margin=0x7f040000;
-        public static int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f040000;
+        public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static int friends_sends_pictures_no=0x7f020000;
-        public static int friends_sends_pictures_select_icon_selected=0x7f020001;
-        public static int friends_sends_pictures_select_icon_unselected=0x7f020002;
-        public static int ic_launcher=0x7f020003;
-        public static int icon_addpic_focused=0x7f020004;
-        public static int pictures_select_icon=0x7f020005;
+        public static final int friends_sends_pictures_no=0x7f020000;
+        public static final int friends_sends_pictures_select_icon_selected=0x7f020001;
+        public static final int friends_sends_pictures_select_icon_unselected=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int icon_addpic_focused=0x7f020004;
+        public static final int pictures_select_icon=0x7f020005;
     }
     public static final class id {
-        public static int album=0x7f080006;
-        public static int album_ck=0x7f080010;
-        public static int album_count=0x7f08000f;
-        public static int album_image=0x7f08000d;
-        public static int album_name=0x7f08000e;
-        public static int btn=0x7f080000;
-        public static int buttombanner=0x7f080005;
-        public static int child_checkbox=0x7f08000b;
-        public static int child_grid=0x7f080008;
-        public static int child_image=0x7f08000a;
-        public static int complete=0x7f080004;
-        public static int framelayout=0x7f080009;
-        public static int list=0x7f08000c;
-        public static int menu_settings=0x7f080011;
-        public static int pop=0x7f080001;
-        public static int preview=0x7f080007;
-        public static int title=0x7f080003;
-        public static int topbanner=0x7f080002;
+        public static final int album=0x7f080005;
+        public static final int album_ck=0x7f08000f;
+        public static final int album_count=0x7f08000e;
+        public static final int album_image=0x7f08000c;
+        public static final int album_name=0x7f08000d;
+        public static final int btn=0x7f080000;
+        public static final int buttombanner=0x7f080004;
+        public static final int child_checkbox=0x7f08000a;
+        public static final int child_grid=0x7f080007;
+        public static final int child_image=0x7f080009;
+        public static final int complete=0x7f080003;
+        public static final int framelayout=0x7f080008;
+        public static final int list=0x7f08000b;
+        public static final int menu_settings=0x7f080010;
+        public static final int preview=0x7f080006;
+        public static final int title=0x7f080002;
+        public static final int topbanner=0x7f080001;
     }
     public static final class layout {
-        public static int publish=0x7f030000;
-        public static int the_picture_selection=0x7f030001;
-        public static int the_picture_selection_item=0x7f030002;
-        public static int the_picture_selection_pop=0x7f030003;
-        public static int the_picture_selection_pop_item=0x7f030004;
+        public static final int publish=0x7f030000;
+        public static final int the_picture_selection=0x7f030001;
+        public static final int the_picture_selection_item=0x7f030002;
+        public static final int the_picture_selection_pop=0x7f030003;
+        public static final int the_picture_selection_pop_item=0x7f030004;
     }
     public static final class menu {
-        public static int activity_main=0x7f070000;
+        public static final int activity_main=0x7f070000;
     }
     public static final class string {
-        public static int action_settings=0x7f050002;
-        public static int app_name=0x7f050000;
-        public static int hello_world=0x7f050001;
+        public static final int action_settings=0x7f050002;
+        public static final int app_name=0x7f050000;
+        public static final int hello_world=0x7f050001;
     }
     public static final class style {
         /** 
@@ -88,9 +87,9 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
          */
-        public static int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f060001;
     }
 }
