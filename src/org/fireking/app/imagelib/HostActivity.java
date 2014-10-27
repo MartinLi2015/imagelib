@@ -1,5 +1,7 @@
 package org.fireking.app.imagelib;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -23,7 +25,7 @@ public class HostActivity extends BaseActivity {
 			public void onClick(View v) {
 				Intent intent = new Intent(HostActivity.this,
 						PicSelectActivity.class);
-				startActivity(intent);
+				startActivityForResult(intent, 0x123);
 			}
 		});
 
@@ -46,4 +48,16 @@ public class HostActivity extends BaseActivity {
 		});
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 0x123 && resultCode == RESULT_OK) {
+			Intent intent = data;
+			List<ImageBean> images = (List<ImageBean>) intent
+					.getSerializableExtra("images");
+			for (ImageBean b : images) {
+				System.out.println(b.toString());
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
 }

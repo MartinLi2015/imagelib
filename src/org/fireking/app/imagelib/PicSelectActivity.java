@@ -1,11 +1,14 @@
 package org.fireking.app.imagelib;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.fireking.app.imagelib.MyImageView.OnMeasureListener;
 import org.fireking.app.imagelib.NativeImageLoader.NativeImageCallBack;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,13 +30,21 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
+/**
+ * 
+ * @author fireking
+ * 
+ */
 public class PicSelectActivity extends BaseActivity {
 
 	GridView gridView;
 	PicSelectAdapter adapter;
 	TextView album;
+	TextView complete;
+	TextView preView;
+
+	List<ImageBean> selecteds = new ArrayList<ImageBean>();
 
 	static final int SCAN_OK = 0x1001;
 
@@ -49,6 +60,27 @@ public class PicSelectActivity extends BaseActivity {
 		setContentView(R.layout.the_picture_selection);
 
 		album = (TextView) this.findViewById(R.id.album);
+		complete = (TextView) this.findViewById(R.id.complete);
+		preView = (TextView) this.findViewById(R.id.preview);
+		preView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
+
+		complete.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.putExtra("images", (Serializable) selecteds);
+				setResult(RESULT_OK, intent);
+				finish();
+			}
+		});
+
 		album.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -69,10 +101,39 @@ public class PicSelectActivity extends BaseActivity {
 			}
 		});
 		gridView = (GridView) this.findViewById(R.id.child_grid);
-		adapter = new PicSelectAdapter(PicSelectActivity.this, gridView);
+		adapter = new PicSelectAdapter(PicSelectActivity.this, gridView,
+				onImageSelectedCountListener);
 		gridView.setAdapter(adapter);
+		adapter.setOnImageSelectedListener(onImageSelectedListener);
 		showPic();
 	}
+
+	OnImageSelectedCountListener onImageSelectedCountListener = new OnImageSelectedCountListener() {
+
+		@Override
+		public int getImageSelectedCount() {
+			return selecteds.size();
+		}
+	};
+
+	OnImageSelectedListener onImageSelectedListener = new OnImageSelectedListener() {
+
+		@Override
+		public void onImageSelected(ImageBean ib) {
+			if (ib.isChecked) {
+				selecteds.add(ib);
+			} else {
+				selecteds.remove(ib);
+			}
+			if (selecteds.size() != 0) {
+				// 更改完成按钮上的数字
+				complete.setText("完成(" + selecteds.size() + "/9)");
+				// 更改预览按钮的数字
+				preView.setText("预览(" + selecteds.size() + ")");
+			}
+
+		}
+	};
 
 	private void showPic() {
 		new Thread(new Runnable() {
@@ -214,6 +275,14 @@ public class PicSelectActivity extends BaseActivity {
 			}
 			return convertView;
 		}
+	}
+
+	public interface OnImageSelectedListener {
+		void onImageSelected(ImageBean ib);
+	}
+
+	public interface OnImageSelectedCountListener {
+		int getImageSelectedCount();
 	}
 
 	public static class ViewHolder {

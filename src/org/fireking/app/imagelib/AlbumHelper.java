@@ -19,7 +19,7 @@ import android.provider.MediaStore;
  * 图片获取助手类
  * 
  * @author join
- *
+ * 
  */
 public class AlbumHelper {
 
@@ -91,10 +91,12 @@ public class AlbumHelper {
 			List<ImageBean> sb;
 			if (beans.containsKey(parentName)) {
 				sb = beans.get(parentName);
-				sb.add(new ImageBean(parentName, size, display_name, path));
+				sb.add(new ImageBean(parentName, size, display_name, path,
+						false));
 			} else {
 				sb = new ArrayList<ImageBean>();
-				sb.add(new ImageBean(parentName, size, display_name, path));
+				sb.add(new ImageBean(parentName, size, display_name, path,
+						false));
 			}
 			beans.put(parentName, sb);
 		}
